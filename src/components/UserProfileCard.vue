@@ -27,11 +27,27 @@
             </li>
           </ul>
           <p>
-            <a href="/users/1/edit"
+            <a v-if="profile.isAdmin" href="/users/1/edit"
               ><button type="submit" class="btn btn-primary">
                 edit
               </button></a
             >
+            <button
+              v-else-if="isFollowed"
+              type="submit"
+              class="btn btn-danger"
+              @click.stop.prevent="deleteFollowing"
+            >
+              取消追蹤
+            </button>
+            <button
+              v-else
+              type="submit"
+              class="btn btn-primary"
+              @click.stop.prevent="addFollowing"
+            >
+              追蹤
+            </button>
           </p>
         </div>
       </div>
@@ -45,6 +61,23 @@ export default {
     profile: {
       type: Object,
       required: true,
+    },
+    initialIsFollowed: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      isFollowed: this.initialIsFollowed,
+    }
+  },
+  methods: {
+    addFollowing() {
+      this.isFollowed = true
+    },
+    deleteFollowing() {
+      this.isFollowed = false
     },
   },
 }
