@@ -27,10 +27,12 @@
             </li>
           </ul>
           <p>
-            <a v-if="profile.isAdmin" href="/users/1/edit"
+            <router-link
+              v-if="profile.isAdmin"
+              :to="{ name: 'user-edit', params: { id: profile.id } }"
               ><button type="submit" class="btn btn-primary">
                 edit
-              </button></a
+              </button></router-link
             >
             <button
               v-else-if="isFollowed"
