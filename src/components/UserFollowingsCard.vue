@@ -1,47 +1,34 @@
 <template>
   <div class="card">
-    <div class="card-header"><strong>5</strong> followings (追蹤者)</div>
+    <div class="card-header">
+      <strong>{{ followings.length }}</strong> followings (追蹤者)
+    </div>
     <div class="card-body">
-      <a href="/users/1">
-        <img
-          src="https://i.imgur.com/WMsHuNP.jpeg"
-          width="60"
-          height="60"
-          class="avatar"
-        />
-      </a>
-      <a href="/users/3">
-        <img
-          src="https://via.placeholder.com/60"
-          width="60"
-          height="60"
-          class="avatar"
-        />
-      </a>
-      <a href="/users/41">
-        <img
-          src="https://via.placeholder.com/60"
-          width="60"
-          height="60"
-          class="avatar"
-        />
-      </a>
-      <a href="/users/21">
-        <img
-          src="https://via.placeholder.com/60"
-          width="60"
-          height="60"
-          class="avatar"
-        />
-      </a>
-      <a href="/users/2">
-        <img
-          src="https://via.placeholder.com/60"
-          width="60"
-          height="60"
-          class="avatar"
-        />
-      </a>
+      <router-link
+        v-for="following in followings"
+        :key="following.id"
+        :to="{ name: 'user', params: { id: following.id } }"
+      >
+        <img :src="following.image" width="60" height="60" class="avatar" />
+      </router-link>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    followings: {
+      type: Array,
+      required: true,
+    },
+  },
+}
+</script>
+
+<style scoped>
+img {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+</style>
