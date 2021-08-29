@@ -33,7 +33,11 @@
 
           <a href="#" class="btn btn-link">Edit</a>
 
-          <button type="button" class="btn btn-link">
+          <button
+            type="button"
+            class="btn btn-link"
+            @click.stop.prevent="deleteRestaurant(restaurant.id)"
+          >
             Delete
           </button>
         </td>
@@ -1024,6 +1028,11 @@ export default {
   methods: {
     fetchRestaurants() {
       this.restaurants = dummyData.restaurants
+    },
+    deleteRestaurant(restaurantId) {
+      this.restaurants = this.restaurants.filter(
+        (restaurant) => restaurant.id !== restaurantId
+      )
     },
   },
 }
